@@ -2,7 +2,6 @@ import { Readable, Writable, Transform } from "node:stream"
 
 class OneToHundredStreams extends Readable {
     index = 1
-
     _read() {
         const i = this.index++
 
