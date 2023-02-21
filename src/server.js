@@ -13,7 +13,8 @@ const server = http.createServer(async (req, res) => {
     }
 
     const activeRouteParams = req.url.match(activeRoute.path)
-    console.log(activeRouteParams)
+    req.params = { ...activeRouteParams.groups } ?? {}
+    
     activeRoute.handler(req, res)
 })
 
