@@ -6,12 +6,14 @@ const server = http.createServer(async (req, res) => {
     const { url, method } = req
     await json(req, res)
 
-    const activeRoute = routes.find(route => route.method === method && route.path === url)
+    const activeRoute = routes.find(route => route.method === method && route.path.test(url))
 
     if (activeRoute === undefined) {
         return res.writeHead(404).end()
     }
 
+    const activeRouteParams = req.url.match(activeRoute.path)
+    console.log(activeRouteParams)
     activeRoute.handler(req, res)
 })
 

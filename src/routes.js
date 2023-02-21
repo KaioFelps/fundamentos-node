@@ -1,5 +1,6 @@
 import { Database } from "./database.js"
 import {randomUUID} from "node:crypto"
+import { buildRoutePath } from "./utils/build-route-path.js"
 
 const database = new Database()
 
@@ -33,6 +34,14 @@ export const routes = [
             database.insert("users", newUser)
     
             return res.writeHead(201).end()
+        }
+    },
+    {
+        method: "DELETE",
+        path: buildRoutePath("/users/:id"),
+        handler: (req, res) => {
+            console.log("yasss")
+            return res.writeHead(200).end()
         }
     }
 ]
